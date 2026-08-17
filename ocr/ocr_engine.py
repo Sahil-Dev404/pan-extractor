@@ -11,8 +11,7 @@ OCRResult = dict[str, Any]
 
 _engine_instance = None
 
-def _get_engine(): # will run only one time
-
+def _get_engine():
     global _engine_instance
     if _engine_instance is None:
         from paddleocr import PaddleOCR
@@ -21,9 +20,15 @@ def _get_engine(): # will run only one time
             _engine_instance = PaddleOCR(
                 use_textline_orientation=True,
                 lang="en",
+                enable_mkldnn=False,
             )
         except TypeError:
-            _engine_instance = PaddleOCR(use_angle_cls=True, lang="en")
+            try:
+                _engine_instance = PaddleOCR(
+                    use_angle_cls=True, lang="en", enable_mkldnn=False
+                )
+            except TypeError:
+                _engine_instance = PaddleOCR(use_angle_cls=True, lang="en")
     return _engine_instance
 
 def _bbox_from_poly(poly: Any) ->list[list[float]]:

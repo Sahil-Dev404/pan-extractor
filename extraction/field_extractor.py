@@ -125,5 +125,5 @@ def extract_fields(ocr_results: list[dict]) -> ExtractedFields:
             "name": round(name_conf,4),
             "pan_number": round(pan_conf, 4),
             "date_of_birth": round(dob_conf, 4),
-        }
+        },
     }

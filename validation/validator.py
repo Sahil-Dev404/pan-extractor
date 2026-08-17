@@ -2,7 +2,7 @@
 this code only validtes the format of the information retirive from the pan card
 '''
 
-from __future__ import __annotations__
+from __future__ import annotations
 
 import re
 from datetime import datetime
